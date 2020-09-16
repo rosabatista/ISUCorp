@@ -1,1 +1,1 @@
-# ISUCorp
+# ISUCorp Small Reservation System
