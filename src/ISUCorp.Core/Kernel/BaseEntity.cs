@@ -5,23 +5,18 @@ namespace ISUCorp.Core.Kernel
     public abstract class BaseEntity
     {
         /// <summary>
-        /// Entity identifier
+        /// Entity identifier.
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Create time
+        /// Time when the entity was added at.
         /// </summary>
-        public DateTime CreateTime { get; set; }
+        public DateTime AddedAt { get; set; }
 
         /// <summary>
-        /// Update time
+        /// Time when the entity was modified at.
         /// </summary>
-        public DateTime? UpdateTime { get; set; }
-
-        /// <summary>
-        /// Delete time
-        /// </summary>
-        public DateTime? DeleteTime { get; set; }
+        public DateTime? ModifiedAt { get; set; }
     }
 }
