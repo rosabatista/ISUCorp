@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISUCorp.API", "ISUCorp.API\ISUCorp.API.csproj", "{39DC77F3-ABDF-4748-80F6-98ED2CB17FC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISUCorp.API", "ISUCorp.API\ISUCorp.API.csproj", "{39DC77F3-ABDF-4748-80F6-98ED2CB17FC3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISUCorp.Core", "ISUCorp.Core\ISUCorp.Core.csproj", "{33FF245E-B236-4AA8-83B2-C0DC57A2A034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISUCorp.Infra", "ISUCorp.Infra\ISUCorp.Infra.csproj", "{14421A51-ED58-4116-99CD-23BEE8D7F4E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{39DC77F3-ABDF-4748-80F6-98ED2CB17FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39DC77F3-ABDF-4748-80F6-98ED2CB17FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39DC77F3-ABDF-4748-80F6-98ED2CB17FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33FF245E-B236-4AA8-83B2-C0DC57A2A034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33FF245E-B236-4AA8-83B2-C0DC57A2A034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33FF245E-B236-4AA8-83B2-C0DC57A2A034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33FF245E-B236-4AA8-83B2-C0DC57A2A034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14421A51-ED58-4116-99CD-23BEE8D7F4E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14421A51-ED58-4116-99CD-23BEE8D7F4E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14421A51-ED58-4116-99CD-23BEE8D7F4E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14421A51-ED58-4116-99CD-23BEE8D7F4E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
