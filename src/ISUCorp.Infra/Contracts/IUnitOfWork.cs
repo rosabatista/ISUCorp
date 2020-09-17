@@ -1,9 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using ISUCorp.Core.Kernel;
+using ISUCorp.Infra.Contexts;
+using System;
+using System.Threading.Tasks;
 
 namespace ISUCorp.Infra.Contracts
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork<TContext> : IDisposable where TContext : CoreDbContext
     {
-        Task CompleteAsync();
+        TContext DbContext { get; }
+
+        IAsyncRepository<TEntity> GetRepositoryAsync<TEntity>() where TEntity : BaseEntity;
+
+        Task<int> SaveChangesAsync();
     }
 }

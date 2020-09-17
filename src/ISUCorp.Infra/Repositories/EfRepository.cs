@@ -9,32 +9,65 @@ using System.Threading.Tasks;
 
 namespace ISUCorp.Infra.Repositories
 {
+    /// <summary>
+    /// Represents a repository of an entity.
+    /// </summary>
+    /// <typeparam name="T">Entity contained in the repository.</typeparam>
+    /// <typeparam name="TC">The context where the repository belongs.</typeparam>
     public class EfRepository<T, TC> : IAsyncRepository<T>
         where T : BaseEntity
         where TC : DbContext
     {
         protected readonly TC _dbContext;
 
+        /// <summary>
+        /// Initializes an instance of <see cref="EfRepository{T, TC}"/>.
+        /// </summary>
+        /// <param name="dbContext"></param>
         public EfRepository(TC dbContext)
         {
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Adds an entity to the repository.
+        /// </summary>
+        /// <param name="entity">The entity to be added.</param>
+        /// <returns>A task that represents the asynchronous Add operation. The task result contains 
+        /// the Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry for the entity. 
+        /// The entry provides access to change tracking information and operations for the entity.</returns>
         public async Task AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
         }
 
+        /// <summary>
+        /// Adds a range of entities to the repository.
+        /// </summary>
+        /// <param name="entites">Entities to be added to the repository.</param>
+        /// <returns></returns>
         public async Task AddRangeAsync(IEnumerable<T> entites)
         {
             await _dbContext.Set<T>().AddRangeAsync(entites);
         }
 
+        /// <summary>
+        /// Asynchronously determines whether the repository contains any elements.
+        /// </summary>
+        /// <returns>The task result contains true if the source sequence 
+        /// contains any elements; otherwise, false.</returns>
         public async Task<bool> AnyAsync()
         {
             return await _dbContext.Set<T>().AnyAsync();
         }
 
+        /// <summary>
+        /// Asynchronously determines whether the repository contains any elements 
+        /// according to a specification.
+        /// </summary>
+        /// <param name="spec">Specification to considere.</param>
+        /// <returns>The task result contains true if the source sequence 
+        /// contains any elements; otherwise, false.</returns>
         public async Task<bool> AnyAsync(ISpecification<T> spec)
         {
             // fetch a Queryable that includes all expression-based includes
@@ -49,11 +82,21 @@ namespace ISUCorp.Infra.Repositories
             return await secondaryResult.AnyAsync(spec.Criteria);
         }
 
+        /// <summary>
+        /// Asynchronously determines the count of elements in the repository.
+        /// </summary>
+        /// <returns>The task result contains the count of element in the repository.</returns>
         public async Task<int> CountAsync()
         {
             return await _dbContext.Set<T>().CountAsync();
         }
 
+        /// <summary>
+        /// Asynchronously determines the count of elements in the repository 
+        /// taking into consideration a specification.
+        /// </summary>
+        /// <param name="spec">Specification to considere.</param>
+        /// <returns>The task result contains the count of element.</returns>
         public async Task<int> CountAsync(ISpecification<T> spec)
         {
             // fetch a Queryable that includes all expression-based includes
