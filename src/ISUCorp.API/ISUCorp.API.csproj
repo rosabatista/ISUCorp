@@ -4,5 +4,21 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp3.1\ISUCorp.API.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netcoreapp3.1\</OutputPath>
+    <NoWarn>1701;1702;1591;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ISUCorp.Core\ISUCorp.Core.csproj" />
+    <ProjectReference Include="..\ISUCorp.Infra\ISUCorp.Infra.csproj" />
+    <ProjectReference Include="..\ISUCorp.Services\ISUCorp.Services.csproj" />
+  </ItemGroup>
+
 
 </Project>

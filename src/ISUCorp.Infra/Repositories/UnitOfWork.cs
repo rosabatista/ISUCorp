@@ -7,6 +7,31 @@ using System.Threading.Tasks;
 
 namespace ISUCorp.Infra.Repositories
 {
+    public class UnitOfWork : IUnitOfWork, IDisposable
+    {
+        private readonly CoreDbContext _context;
+
+        public UnitOfWork(CoreDbContext context)
+        {
+            _context = context;
+        }
+
+        /// <summary>
+        /// Saves all pendant changes in the context.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous save operation. 
+        /// The task result contains the number of state entries written to the database.</returns>
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            _context?.Dispose();
+        }
+    }
+
     /// <summary>
     /// Represents a unit of work with one or more repositories.
     /// </summary>
