@@ -1,12 +1,12 @@
-﻿using ISUCorp.Core.Kernel;
+﻿using ISUCorp.Services.Resources.Responses;
 using System;
 
-namespace ISUCorp.Core.Domain
+namespace ISUCorp.Services.Resources.Models
 {
-    public class Reservation : BaseEntity
+    public class ReservationResource
     {
         /// <summary>
-        /// Date for reservation.
+        /// Date when reservation starts.
         /// </summary>
         public DateTime Date { get; set; }
 
@@ -33,7 +33,7 @@ namespace ISUCorp.Core.Domain
         /// <summary>
         /// Who made the reservation.
         /// </summary>
-        public Contact Contact { get; set; }
+        public ContactResource Contact { get; set; }
 
         /// <summary>
         /// Place identifier.
@@ -43,6 +43,6 @@ namespace ISUCorp.Core.Domain
         /// <summary>
         /// Where is the reservation.
         /// </summary>
-        public Place Place { get; set; }
+        public PlaceResource Place { get; set; }
     }
 }

@@ -18,11 +18,7 @@ namespace ISUCorp.Infra.Configurations
             builder.Property(e => e.ModifiedAt)
                 .HasDefaultValueSql("null");
 
-            builder.Property(e => e.StartDate)
-                .IsRequired()
-                .HasColumnType("date");
-
-            builder.Property(e => e.EndDate)
+            builder.Property(e => e.Date)
                 .IsRequired()
                 .HasColumnType("date");
 
