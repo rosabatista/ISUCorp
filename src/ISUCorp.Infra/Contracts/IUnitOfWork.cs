@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace ISUCorp.Infra.Contracts
 {
+    public interface IUnitOfWork
+    {
+        Task<int> SaveChangesAsync();
+    }
+
     public interface IUnitOfWork<TContext> : IDisposable where TContext : CoreDbContext
     {
         TContext DbContext { get; }

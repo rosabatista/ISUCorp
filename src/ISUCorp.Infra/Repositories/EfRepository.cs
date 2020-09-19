@@ -29,6 +29,11 @@ namespace ISUCorp.Infra.Repositories
             _dbContext = dbContext;
         }
 
+        public IQueryable<T> DbSet()
+        {
+            return _dbContext.Set<T>().AsNoTracking();
+        }
+
         /// <summary>
         /// Adds an entity to the repository.
         /// </summary>
