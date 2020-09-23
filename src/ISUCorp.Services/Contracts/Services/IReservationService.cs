@@ -15,5 +15,7 @@ namespace ISUCorp.Services.Contracts.Services
         Task<DataResponse<ReservationResource>> UpdateAsync(int reservationId,
             SaveReservationResource reservationResource);
         Task<YesNoResponse> RemoveAsync(int reservationId);
+        Task<YesNoResponse> RateAsync(int reservationId, int rating);
+        Task<YesNoResponse> SetFavoriteAsync(int reservationId, bool favorite);
     }
 }

@@ -1,0 +1,147 @@
+<div class="jumbotron jumbotron-navigation">
+  <div class="container container-navigation">
+    <div class="row row-navigation">
+      <div class="navigation-left">
+          <div *ngIf="reservationId;else other_content">
+            <p i18n>Edit Reservation</p>
+        </div>
+        
+        <ng-template #other_content>
+            <p i18n>Create Reservation</p>
+        </ng-template>
+      </div>
+      
+      <div class="navigation-center">
+          <p i18n>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+              tempor incididunt ut labore et dolore magna aliqua. 
+          </p>
+      </div>
+
+      <div class="navigation-right">
+        <a [routerLink]="['/']" class="btn btn-secondary" i18n>Reservation List</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="global-container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <form [formGroup]="reservationForm" (ngSubmit)="save()">
+
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">Contact Information</h6> 
+            <div class="form-group form-row">
+                <div class="col-md-3 col-xs-12 mb-1">
+                    <input type="text" class="form-control" placeholder="Contact Name"
+                          formControlName="name" required  maxlength="255" (blur)="searchContact()"/>
+                    <div *ngIf="reservationForm.get('name').invalid && 
+                                (reservationForm.get('name').dirty || reservationForm.get('name').touched)">
+                        <div class="text-danger font-size-small ml-3" 
+                            *ngIf="reservationForm.get('name').errors.required">
+                            Contact Name is required.
+                        </div>
+                        <div class="text-danger font-size-small ml-3" 
+                            *ngIf="reservationForm.get('name').errors.maxlength">
+                            Contact Name must be at most 255 characters long.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 mb-1">
+                    <select formControlName="type" class="form-control" required>
+                        <option [ngValue]="null">Contact Type</option>
+                        <option *ngFor="let type of contactTypeValues" [ngValue]="type">
+                            {{ type }}
+                        </option>
+                    </select>
+                    <div *ngIf="reservationForm.get('type').invalid && 
+                                (reservationForm.get('type').dirty || reservationForm.get('type').touched)">
+                        <div class="text-danger font-size-small ml-3" 
+                            *ngIf="reservationForm.get('type').errors.required">
+                            Contact Type is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 mb-1">
+                    <input type="text" class="form-control" placeholder="Phone Number" 
+                          formControlName="phone" pattern="^((\\+91-?)|0)?[0-9]{10}$" maxlength="10" />
+                    <div *ngIf="reservationForm.get('phone').invalid && 
+                          (reservationForm.get('phone').dirty || reservationForm.get('phone').touched)">
+                        <div class="text-danger font-size-small ml-3" 
+                            *ngIf="reservationForm.get('phone').errors.pattern">
+                            Enter 10 digits Phone Number.
+                        </div>
+                        <div class="text-danger font-size-small ml-3" 
+                            *ngIf="reservationForm.get('phone').errors.maxlength">
+                            Phone Number must be at most 10 characters long.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 mb-1">
+                    <input type="date" class="form-control" placeholder="Birth Date"
+                          formControlName="birthDate" required />
+                    <div *ngIf="reservationForm.get('birthDate').invalid && 
+                          (reservationForm.get('birthDate').dirty || reservationForm.get('birthDate').touched)">
+                        <div class="text-danger font-size-small ml-3" 
+                                *ngIf="reservationForm.get('birthDate').errors.required">
+                            Birth Date is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+            <h6 class="card-title">Reservation Information</h6> 
+            <div class="form-group form-row">
+              <div class="col-md-3 col-xs-12 mb-1">
+                <input type="text" class="form-control" placeholder="Reservation Place"
+                      formControlName="place" required  maxlength="255" (blur)="searchPlace()"/>
+                <div *ngIf="reservationForm.get('place').invalid && 
+                            (reservationForm.get('place').dirty || reservationForm.get('place').touched)">
+                    <div class="text-danger font-size-small ml-3" 
+                        *ngIf="reservationForm.get('place').errors.required">
+                        Reservation Place is required.
+                    </div>
+                    <div class="text-danger font-size-small ml-3" 
+                        *ngIf="reservationForm.get('place').errors.maxlength">
+                        Reservation Place must be at most 255 characters long.
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-12 mb-1">
+                <input type="date" class="form-control" placeholder="Reservation Date"
+                      formControlName="date" required />
+                <div *ngIf="reservationForm.get('date').invalid && 
+                            (reservationForm.get('date').dirty || 
+                            reservationForm.get('date').touched)">
+                    <div class="text-danger font-size-small ml-3" 
+                            *ngIf="reservationForm.get('date').errors.required">
+                        Reservation Date is required.
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <div class="col-md-12 col-xs-12 mb-1">
+                <ckeditor formControlName="notes"
+                      [config]="config"  
+                      [readonly]="false" 
+                      debounce="500">  
+                </ckeditor>
+              </div>
+            </div>
+      
+            <div class="form-group" style="width: 100%;">
+              <button class="btn btn-danger mr-1" type="submit" [disabled]="!reservationForm.valid">Submit</button>
+              <a class="btn btn-secondary" [routerLink]="['/']" i18n>Back</a>
+            </div>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+  

@@ -55,6 +55,9 @@ namespace ISUCorp.Infra.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Contacts");
                 });
 
@@ -86,6 +89,9 @@ namespace ISUCorp.Infra.Migrations
                         .HasMaxLength(255);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Places");
                 });

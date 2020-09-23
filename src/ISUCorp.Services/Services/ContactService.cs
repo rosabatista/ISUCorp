@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using ISUCorp.Core.Domain;
 using ISUCorp.Infra.Contracts;
-using ISUCorp.Infra.Specifications;
 using ISUCorp.Services.Contracts.Services;
 using ISUCorp.Services.Exceptions;
 using ISUCorp.Services.Extensions;
 using ISUCorp.Services.Mappers;
 using ISUCorp.Services.Resources.Requests;
 using ISUCorp.Services.Resources.Responses;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +20,11 @@ namespace ISUCorp.Services.Services
     /// </summary>
     public class ContactService : IContactService
     {
-        private readonly IAsyncRepository<Contact> _contactRepository;
+        private readonly IContactRepository _contactRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ContactService(IAsyncRepository<Contact> contactRepository,
+        public ContactService(IContactRepository contactRepository,
             IUnitOfWork unitOfWork, 
             IMapper mapper)
         {
@@ -73,13 +73,7 @@ namespace ISUCorp.Services.Services
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                var contact = await _contactRepository.FirstOrDefaultAsync(new ContactsByNameSpec(name));
-
-                if (contact == null)
-                {
-                    throw new NotFoundException(nameof(Contact), name);
-                }
-
+                var contact = (await _contactRepository.SearchByName(name)).FirstOrDefault();
                 var contactResource = _mapper.Map<Contact, ContactResource>(contact);
                 return new DataResponse<ContactResource>(contactResource);
             }
