@@ -1,0 +1,109 @@
+<div class="jumbotron jumbotron-navigation">
+    <div class="container container-navigation">
+      <div class="row row-navigation">
+        <div class="navigation-left">
+            <div *ngIf="contactId;else other_content">
+                <p i18n>Edit Contact</p>
+            </div>
+            
+            <ng-template #other_content>
+                <p i18n>Create Contact</p>
+            </ng-template>
+        </div>
+        
+        <div class="navigation-center">
+            <p i18n>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                tempor incididunt ut labore et dolore magna aliqua. 
+            </p>
+        </div>
+  
+        <div class="navigation-right">
+          <a [routerLink]="['/contacts']" class="btn btn-secondary" i18n>Contact List</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="global-container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <form [formGroup]="contactForm" (ngSubmit)="save()">
+  
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">Contact Information</h6> 
+              <div class="form-group form-row">
+                  <div class="col-md-3 col-xs-12">
+                      <input type="text" class="form-control" placeholder="Contact Name"
+                            formControlName="name" required  maxlength="255" 
+                            (blur)="search()"/>
+                      <div *ngIf="contactForm.get('name').invalid && 
+                                  (contactForm.get('name').dirty || contactForm.get('name').touched)">
+                          <div class="text-danger font-size-small ml-3" 
+                              *ngIf="contactForm.get('name').errors.required" i18n>
+                              Contact Name is required.
+                          </div>
+                          <div class="text-danger font-size-small ml-3" 
+                              *ngIf="contactForm.get('name').errors.maxlength" i18n>
+                              Contact Name must be at most 255 characters long.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                      <select formControlName="type" class="form-control" required>
+                          <option [ngValue]="null" i18n>Contact Type</option>
+                          <option *ngFor="let type of contactTypeValues" [ngValue]="type">
+                              {{ type }}
+                          </option>
+                      </select>
+                      <div *ngIf="contactForm.get('type').invalid && 
+                                  (contactForm.get('type').dirty || contactForm.get('type').touched)">
+                          <div class="text-danger font-size-small ml-3" 
+                              *ngIf="contactForm.get('type').errors.required" i18n>
+                              Contact Type is required.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                      <input type="text" class="form-control" placeholder="Phone Number" 
+                            formControlName="phone" pattern="^((\\+91-?)|0)?[0-9]{10}$" maxlength="10" />
+                      <div *ngIf="contactForm.get('phone').invalid && 
+                            (contactForm.get('phone').dirty || contactForm.get('phone').touched)">
+                          <div class="text-danger font-size-small ml-3" 
+                              *ngIf="contactForm.get('phone').errors.pattern" i18n>
+                              Enter 10 digits Phone Number.
+                          </div>
+                          <div class="text-danger font-size-small ml-3" 
+                              *ngIf="contactForm.get('phone').errors.maxlength" i18n>
+                              Phone Number must be at most 10 characters long.
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                      <input type="date" class="form-control" placeholder="Birth Date"
+                            formControlName="birthDate" required />
+                      <div *ngIf="contactForm.get('birthDate').invalid && 
+                            (contactForm.get('birthDate').dirty || contactForm.get('birthDate').touched)">
+                          <div class="text-danger font-size-small ml-3" 
+                                  *ngIf="contactForm.get('birthDate').errors.required" i18n>
+                              Birth Date is required.
+                          </div>
+                      </div>
+                  </div>
+              </div>
+        
+              <div class="form-group" style="width: 100%;">
+                <button class="btn btn-danger mr-1" type="submit" 
+                        [disabled]="!contactForm.valid" i18n>Submit</button>
+                <a class="btn btn-secondary" [routerLink]="['/contacts']" i18n>Back</a>
+              </div>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  
+    

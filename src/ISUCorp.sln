@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISUCorp.Core", "ISUCorp.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISUCorp.Infra", "ISUCorp.Infra\ISUCorp.Infra.csproj", "{14421A51-ED58-4116-99CD-23BEE8D7F4E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISUCorp.Services", "ISUCorp.Services\ISUCorp.Services.csproj", "{276B1202-D2B0-4CB5-986B-733DC8542C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISUCorp.Services", "ISUCorp.Services\ISUCorp.Services.csproj", "{276B1202-D2B0-4CB5-986B-733DC8542C29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -16,4 +16,11 @@ namespace ISUCorp.Core.Domain
         [Description("Type Four")]
         TypeFour = 4
     }
+
+    public class ContactTypeItem 
+    { 
+        public int Value { get; set; }
+
+        public string Name { get; set; }
+    }
 }

@@ -1,9 +1,10 @@
-﻿using ISUCorp.Services.Resources.Responses;
+﻿using ISUCorp.Services.Contracts.Resources;
+using ISUCorp.Services.Resources.Responses;
 using System;
 
 namespace ISUCorp.Services.Resources.Models
 {
-    public class ReservationResource
+    public class ReservationResource : BaseEntityResource
     {
         /// <summary>
         /// Date when reservation starts.

@@ -65,7 +65,7 @@ namespace ISUCorp.API.Controllers
         /// </summary>
         /// <param name="name">Contact's name.</param>
         /// <returns>Contact's details whether exists.</returns>
-        [HttpGet("{name}/find_by_name")]
+        [HttpGet("find_by_name/{name}")]
         [ProducesResponseType(typeof(ContactResource), 200)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         public async Task<IActionResult> GetByNameAsync(string name)

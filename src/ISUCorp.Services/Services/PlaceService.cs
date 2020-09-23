@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ISUCorp.Core.Domain;
 using ISUCorp.Infra.Contracts;
-using ISUCorp.Infra.Specifications;
 using ISUCorp.Services.Contracts.Services;
 using ISUCorp.Services.Exceptions;
 using ISUCorp.Services.Extensions;
@@ -9,6 +8,7 @@ using ISUCorp.Services.Mappers;
 using ISUCorp.Services.Resources.Models;
 using ISUCorp.Services.Resources.Requests;
 using ISUCorp.Services.Resources.Responses;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +18,11 @@ namespace ISUCorp.Services.Services
 {
     public class PlaceService : IPlaceService
     {
-        private readonly IAsyncRepository<Place> _placeRepository;
+        private readonly IPlaceRepository _placeRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public PlaceService(IAsyncRepository<Place> placeRepository,
+        public PlaceService(IPlaceRepository placeRepository,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -71,13 +71,7 @@ namespace ISUCorp.Services.Services
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                var place = await _placeRepository.FirstOrDefaultAsync(new PlacesByNameSpec(name));
-
-                if (place == null)
-                {
-                    throw new NotFoundException(nameof(Contact), name);
-                }
-
+                var place = (await _placeRepository.SearchByName(name)).FirstOrDefault();
                 var placeResource = _mapper.Map<Place, PlaceResource>(place);
                 return new DataResponse<PlaceResource>(placeResource);
             }

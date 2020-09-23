@@ -1,0 +1,87 @@
+<div class="jumbotron jumbotron-navigation">
+    <div class="container container-navigation">
+      <div class="row row-navigation">
+        <div class="navigation-left">
+            <p i18n>Place List</p>
+        </div>
+        
+        <div class="navigation-center">
+            <p i18n>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                tempor incididunt ut labore et dolore magna aliqua. 
+            </p>
+        </div>
+  
+        <div class="navigation-right">
+          <a [routerLink]="['/place-add']" class="btn btn-secondary" i18n>Create Place</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="global-container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            
+            <div class="form-row">
+              <div class="form-group col-md-3 col-xs-12">
+                <form [formGroup]="orderForm">
+                  <select formControlName="sortOrder" class="form-control font-size-small" 
+                          (change)="changeOrder()">
+                    <option *ngFor="let order of sortOrders" [ngValue]="order">
+                      {{ order.name }}
+                    </option>
+                  </select>
+                </form>
+              </div>
+            </div>
+        
+            <p *ngIf="!(places$)"><em i18n>Loading...</em></p>
+  
+            <table class="table table-hover table-striped" *ngIf="places$">
+                <thead>
+                  <tr>
+                    <th scope="col" i18n>Place Name</th>
+                    <th scope="col" i18n>Address</th>
+                    <th scope="col" i18n>Description</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let place of places$ | async" class="entity-details"
+                        (click)="viewDetails(place.id)">
+                        <td scope="row">{{place.name}}</td>
+                        <td></td>
+                        <td><div innerHTML="{{place.description}}"></div></td>
+                        <td>
+                            <a [routerLink]="['/place-edit/', place.id]" 
+                                class="btn btn-sm btn-secondary float-right" i18n>Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+        
+            <!-- && pagination.totalPages > 1 -->
+            <nav aria-label="Page navigation" 
+                  *ngIf="pagination && pagination.totalPages > 1">
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="!pagination.hasPrevious">
+                  <a class="page-link" (click)="loadPlaces(pagination.currentPage - 1)">&laquo;</a>
+                </li>
+                <li class="page-item" [class.disabled]="pagination.currentPage === item"
+                    *ngFor="let item of createRange();">
+                  <a class="page-link" [class.current-page]="pagination.currentPage === item"
+                      (click)="loadPlaces(item)">{{item}}</a>
+                </li>
+                <li class="page-item" [class.disabled]="!pagination.hasNext">
+                  <a class="page-link" (click)="loadPlaces(pagination.currentPage + 1)">&raquo;</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

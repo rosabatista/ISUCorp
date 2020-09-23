@@ -1,0 +1,115 @@
+<div class="small-device-nav">
+  <a href="#">Create Reservation</a>
+</div>
+
+<div class="jumbotron jumbotron-navigation">
+  <div class="container container-navigation">
+    <div class="row row-navigation">
+      <div class="navigation-left">
+          <p i18n>Reservation List</p>
+      </div>
+      
+      <div class="navigation-center">
+          <p i18n>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+              tempor incididunt ut labore et dolore magna aliqua. 
+          </p>
+      </div>
+
+      <div class="navigation-right">
+        <a [routerLink]="['/reservation-add']" class="btn btn-secondary" i18n>Create Reservation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="global-container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-3 col-sm-6 col-xs-12">
+              <form [formGroup]="orderForm">
+                <select formControlName="sortOrder" class="form-control font-size-small" 
+                        (change)="changeOrder()">
+                  <option *ngFor="let order of sortOrders" [ngValue]="order">
+                    {{ order.name }}
+                  </option>
+                </select>
+              </form>
+            </div>
+          </div>
+      
+          <p *ngIf="!(reservations$)"><em i18n>Loading...</em></p>
+      
+          <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+            </span>
+          </ng-template>
+      
+          <table class="table table-sm table-hover" *ngIf="reservations$">
+            <tbody>
+              <tr *ngFor="let reservation of reservations$ | async">
+                <div class="container">
+                  <div class="row p-1">
+                    <div class="col-md-5 col-xs-5 m-0 p-0 entity-details" 
+                         (click)="viewDetails(reservation.id)">
+                      <img class="mr-2"
+                        src="../../assets/places/dafault.jpg" width="40px" height="30px" />
+                      <div class="div-contact-name">
+                        <span class="reservation-name">
+                          {{reservation.contact.name}}
+                        </span>
+                      </div>
+                      <div>
+                        <span class="reservation-date">
+                          {{reservation.date | date:'fullDate'}} {{reservation.date | date:'shortTime'}}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 m-0 p-0 div-contact-rating">
+                      <p class="mb-0 reservation-rating" i18n>Rating</p>
+                      <ngb-rating id="rating-{{reservation.id}}" [starTemplate]="t" [(rate)]="reservation.ranking" 
+                                  [max]="5" [readonly]="true"></ngb-rating>
+                    </div>
+                    <div class="col-md-3 col-xs-3 m-0 p-0 div-contact-favorite">
+                      <a id="favorite-{{reservation.id}}" href="#" (click)="setFavorite(reservation.id)"
+                         [class.reservation-favorites]="!reservation.isFavorite" 
+                         [class.reservation-favorites-disabled]="reservation.isFavorite" i18n>
+                        <span>Favorites</span> <span class="reservation-heart-favorites">♡</span>
+                      </a>
+                    </div>
+                    <div class="col-md-1 col-xs-1 m-0 p-0 div-contact-button">
+                      <a [routerLink]="['/reservation-edit/', reservation.id]" 
+                         class="btn btn-sm btn-secondary float-right" i18n>Edit</a>
+                    </div>
+                  </div>
+                </div>
+                </tr>
+            </tbody>
+          </table>
+      
+          <!-- && pagination.totalPages > 1 -->
+          <nav class="font-size-small" aria-label="Page navigation example" 
+               *ngIf="pagination && pagination.totalPages > 1">
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="!pagination.hasPrevious">
+                <a class="page-link" (click)="loadReservations(pagination.currentPage - 1)">&laquo;</a>
+              </li>
+              <li class="page-item" [class.disabled]="pagination.currentPage === item"
+                  *ngFor="let item of createRange();">
+                <a class="page-link" [class.current-page]="pagination.currentPage === item"
+                   (click)="loadReservations(item)">{{item}}</a>
+              </li>
+              <li class="page-item" [class.disabled]="!pagination.hasNext">
+                <a class="page-link" (click)="loadReservations(pagination.currentPage + 1)">&raquo;</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
