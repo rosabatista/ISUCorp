@@ -12,6 +12,8 @@ namespace ISUCorp.Infra.Configurations
             builder.Property(e => e.Id)
                 .UseIdentityColumn();
 
+            builder.HasIndex(e => e.Name).IsUnique();
+
             builder.Property(e => e.AddedAt)
                 .IsRequired();
 

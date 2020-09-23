@@ -1,0 +1,17 @@
+.jumbotron {
+    background-color: #a09c9c7a;
+    border-radius: 0;
+    height: 100%;
+    margin-bottom: 0;
+    padding: 20px 0;
+}
+
+.container {
+    padding: 0;
+    max-width: 100%;
+}
+
+.container-footer {
+    padding-left: 17.5%;
+    padding-right: 17.5%;
+}

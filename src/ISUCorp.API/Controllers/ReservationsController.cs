@@ -82,6 +82,48 @@ namespace ISUCorp.API.Controllers
         }
 
         /// <summary>
+        /// Rates a reservation.
+        /// </summary>
+        /// <param name="id">Reservation identifier.</param>
+        /// <param name="rating">Rating.</param>
+        /// <returns>Whether the reservation was rated.</returns>
+        [HttpPost("{id}/rate/{rating}")]
+        [ProducesResponseType(typeof(ReservationResource), 201)]
+        [ProducesResponseType(typeof(ErrorResource), 400)]
+        public async Task<IActionResult> PostRateAsync(int id, int rating)
+        {
+            var response = await _reservationService.RateAsync(id, rating);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Set a reservation as favorite.
+        /// </summary>
+        /// <param name="id">Reservation identifier.</param>
+        /// <param name="favorite">Is favorite.</param>
+        /// <returns>Whether was saved.</returns>
+        [HttpPost("set_favorite/{id}")]
+        [ProducesResponseType(typeof(ReservationResource), 201)]
+        [ProducesResponseType(typeof(ErrorResource), 400)]
+        public async Task<IActionResult> PostRateAsync(int id)
+        {
+            var response = await _reservationService.SetFavoriteAsync(id, true);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Updates an existing reservation.
         /// </summary>
         /// <param name="id">Reservation identifier.</param>

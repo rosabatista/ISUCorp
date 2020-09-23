@@ -47,7 +47,7 @@ namespace ISUCorp.API.Filters
 
             var contactByNameResource = await _contactService.FindByNameAsync(saveContactResource.Name);
 
-            if (contactByNameResource.Success)
+            if (contactByNameResource.Success && contactByNameResource.Data != null)
             {
                 if (contactByIdResource == null || 
                     contactByNameResource.Data.Id != contactByIdResource.Data.Id)

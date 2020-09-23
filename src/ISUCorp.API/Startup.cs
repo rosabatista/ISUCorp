@@ -9,6 +9,7 @@ using ISUCorp.Services.Mappers;
 using ISUCorp.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,15 @@ namespace ISUCorp.API
             // Add swagger for documentation
             services.AddCustomSwagger();
 
+            // Add Cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => 
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
+            });
+
             // Add DbContext using SQL Server Provider
             var dataConnectionString = Configuration["ConnectionStrings:Data"];
             services.AddDbContext<CoreDbContext>(options => options.UseSqlServer(dataConnectionString));
@@ -44,12 +54,19 @@ namespace ISUCorp.API
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IPlaceService, PlaceService>();
             services.AddScoped<IReservationService, ReservationService>();
+            services.AddScoped<IUtilService, UtilService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // generic repository dependencies
-            services.AddScoped<IAsyncRepository<Contact>, EfRepository<Contact, CoreDbContext>>();
-            services.AddScoped<IAsyncRepository<Place>, EfRepository<Place, CoreDbContext>>();
+            services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IPlaceRepository, PlaceRepository>();
             services.AddScoped<IAsyncRepository<Reservation>, EfRepository<Reservation, CoreDbContext>>();
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ISUCorpApp/dist";
+            });
 
             services.AddControllers();
         }
@@ -62,6 +79,8 @@ namespace ISUCorp.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
+
             app.UseCustomSwagger();
 
             app.UseHttpsRedirection();
@@ -70,9 +89,23 @@ namespace ISUCorp.API
 
             app.UseAuthorization();
 
+            app.UseSpaStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+                spa.Options.SourcePath = "ISUCorpApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
         }
     }

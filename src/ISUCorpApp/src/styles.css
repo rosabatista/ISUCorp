@@ -1,0 +1,407 @@
+body {
+    background-color: #a09c9c7a;
+}
+
+.small-device-nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: right;
+    font-size: 15px;
+    display: none;
+}
+
+.small-device-nav a {
+    color: white;
+}
+
+.small-device-nav a:hover {
+    text-decoration: none;
+}
+
+.header-title {
+    float: left; 
+    font-weight: 400;
+    width: 205px;
+    cursor: pointer;
+    pointer-events:visible;
+}
+
+.header-description {
+    align-items: center; 
+    display: flex; 
+    float: left; 
+    font-size: 20px;
+    padding-left: 30px; 
+}
+
+/* NAVIGATION */
+
+.jumbotron-navigation {
+    background-color: #e9ecef;
+    border-radius: 0;
+    height: 100%;
+    margin-bottom: 0;
+    padding: 15px 0;
+}
+
+.container-navigation {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.row-navigation {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.navigation-left {
+    font-weight: 400;
+    width: 23%;
+}
+
+.navigation-center {
+    align-items: center; 
+    display: flex; 
+    float: left; 
+    font-size: 20px;
+    padding-left: 30px; 
+    width: 44%;
+}
+
+.navigation-right {
+    text-align: right;
+    width: 33%;
+}
+
+.navigation-left p {
+    font-size: 22px;
+    color: #dc3545;
+}
+
+.navigation-center p {
+    color: #646363;
+    font-size: 14px;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+/* NAVIGATION */
+
+/* GLOBAL CONTAINER */
+.global-container {
+    background-color: #a09c9c7a;
+    border-radius: 0;
+    padding-left: 17.5%;
+    padding-right: 17.5%;
+    max-width: 100%;
+}
+
+.global-container .row {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 20px;
+}
+
+.card {
+    border-radius: 0;
+}
+/* GLOBAL CONTAINER */
+
+
+.font-size-small {
+    font-size: 13px;
+}
+
+.btn {
+    border-radius: 0;
+    color: white;
+    padding: 8px 18px;
+    text-transform: uppercase;
+}
+
+input {
+    border-radius: 0 !important;
+}
+
+.btn-sm {
+    font-size: 11px;
+    padding: 4px 12px;
+}
+
+select {
+    border-radius: 0 !important;
+    color: #a09c9c7a;
+}
+
+.row-spaced { 
+    border-collapse: separate; 
+    border-spacing: 0 7px; 
+}
+
+.td-buttons {
+    text-align: right;
+}
+
+.td-buttons button {
+    margin-left: 8px;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+/* style glyph */
+.inner-addon .fa {
+    padding: 10px;
+    position: absolute;
+    pointer-events: none;
+    color: #a09c9c7a;
+}
+
+.favorite .fa {
+    padding: 5px !important;
+}
+
+/* align glyph */
+.left-addon .fa  { left:  0px;}
+.right-addon .fa { right: 0px;}
+
+/* add padding  */
+.left-addon input, .left-addon a  { padding-left:  30px; }
+.right-addon input, .right-addon a { padding-right: 30px; }
+
+.page-item .page-link {
+    border-radius: 0;
+    color: black;
+    padding: .3rem .65rem;
+}
+
+.current-page {
+    background-color: #999898 !important;
+    color: white !important;
+}
+
+.card-title {
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.entity-details {
+    cursor: pointer;
+    pointer-events: visible;
+}
+
+.entity-details > div {
+    line-height: 12px;
+    font-size: 15px;
+}
+
+.reservation-name {
+    color: black;
+    font-weight: 500;
+    line-height: 12px;
+    position: relative;
+    top: -30px;
+    left: 50px;
+}
+
+.reservation-date {
+    color: #6c757d;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 12px;
+    position: relative;
+    top: -25px;
+    left: 50px;
+}
+
+.reservation-rating {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 13px;
+}
+
+.reservation-favorites {
+    color: #dc3545;
+    position: relative;
+    top: 5px;
+}
+
+.reservation-favorites:hover {
+    text-decoration: none;
+    color: #6c757d;
+}
+
+.reservation-favorites-disabled {
+    color:grey;
+    text-decoration:none;
+    cursor:default;
+    pointer-events:none;
+    top: 5px;
+}
+
+.reservation-heart-favorites {
+    font-size: 30px;
+    line-height: 0;
+    position: relative;
+    top: 5px;
+}
+
+.card-details input, .card-details ckeditor {
+    font-size: 14px;
+}
+
+.star {
+    border-color: transparent;
+    color: #d3d3d3;
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 13px;
+    position: relative;
+  }
+
+  .full {
+    color: #ffc107;
+  }
+
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #ffc107;
+  }
+
+  @media (max-width: 480px) {
+    .small-device-nav {
+        display: inherit;
+        font-size: 14px;
+        top: 2.6rem;
+        right: 1rem;
+    }
+
+    .header-title { 
+        font-size: 2em; 
+        text-align: left;
+        width: 100%;
+    }
+
+    .navigation-left {
+        width: 100%;
+    }
+
+    .jumbotron-navigation {
+        padding: 3px 0 5px;
+    }
+
+    .jumbotron-navigation p {
+        margin-bottom: 0;
+    }
+
+    .global-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .global-container .row:first-child {
+        padding-top: 0;
+    }
+
+    .container-navigation {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .container-header {
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+
+    .reservation-name {
+        top: 0;
+        left: 0;
+    }
+    
+    .reservation-date {
+        top: 5px;
+        left: 0;
+    }
+
+    .div-contact-favorite {
+        text-align: right;
+        top: -27px;
+        right: 70px;
+    }
+
+    .div-contact-button {
+        top: -47px
+    }
+
+    .header-description, .navigation-right, .navigation-center,
+    .entity-details img, .div-contact-rating, .div-contact-favorite a span:first-child { 
+        display: none; 
+    }
+}
+
+@media (min-width:481px) and (max-width:768px) {
+    .small-device-nav {
+        display: inherit;
+        top: 3.5rem;
+        right: 3.5rem;
+    }
+
+    .header-title { 
+        font-size: 3em; 
+        text-align: left;
+        width: 100%;
+    }
+
+    .navigation-left {
+        width: 100%;
+    }
+
+    .reservation-name {
+        top: 0;
+        left: 0;
+    }
+    
+    .reservation-date {
+        top: 5px;
+        left: 0;
+    }
+
+    .div-contact-favorite {
+        text-align: right;
+        top: -27px;
+        right: 70px;
+    }
+
+    .div-contact-button {
+        top: -47px
+    }
+
+    .header-description, .navigation-right, .navigation-center, 
+    .entity-details img, .div-contact-rating, .div-contact-favorite a span:first-child { 
+        display: none; 
+    }
+}
+
+@media  (min-width:769px) and (max-width:1024px)  {
+    .container-navigation {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .navigation-left p {
+        font-size: 20px;
+    }
+
+    .navigation-center p {
+        font-size: 13px;
+    }
+
+    .navigation-right a {
+        font-size: 14px;
+    } 
+}

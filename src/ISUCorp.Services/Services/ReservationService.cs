@@ -20,14 +20,14 @@ namespace ISUCorp.Services.Services
     public class ReservationService : IReservationService
     {
         private readonly IAsyncRepository<Reservation> _reservationRepository;
-        private readonly IAsyncRepository<Contact> _contactRepository;
-        private readonly IAsyncRepository<Place> _placeRepository;
+        private readonly IContactRepository _contactRepository;
+        private readonly IPlaceRepository _placeRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public ReservationService(IAsyncRepository<Reservation> reservationRepository,
-            IAsyncRepository<Contact> contactRepository,
-            IAsyncRepository<Place> placeRepository,
+            IContactRepository contactRepository,
+            IPlaceRepository placeRepository,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -138,7 +138,12 @@ namespace ISUCorp.Services.Services
 
                     if (contact != null)
                     {
+                        ContactMapper.Map(contact, reservationResource.Contact);
                         reservation.Contact = contact;
+                    }
+                    else
+                    {
+                        reservation.Contact = _mapper.Map<Contact>(reservationResource.Contact);
                     }
                 }
 
@@ -189,7 +194,12 @@ namespace ISUCorp.Services.Services
 
                     if (contact != null)
                     {
+                        ContactMapper.Map(contact, reservationResource.Contact);
                         reservation.Contact = contact;
+                    }
+                    else
+                    {
+                        reservation.Contact = _mapper.Map<Contact>(reservationResource.Contact);
                     }
                 }
 
@@ -224,6 +234,54 @@ namespace ISUCorp.Services.Services
                 }
 
                 _reservationRepository.Remove(reservation);
+                await _unitOfWork.SaveChangesAsync();
+
+                return new YesNoResponse();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new YesNoResponse(ex.Message);
+            }
+        }
+
+        public async Task<YesNoResponse> RateAsync(int reservationId, int rating)
+        {
+            try
+            {
+                var reservation = await _reservationRepository.FindByIdAsync(reservationId);
+
+                if (reservation == null)
+                {
+                    throw new NotFoundException(nameof(Reservation), reservationId);
+                }
+
+                reservation.Rating = rating;
+                _reservationRepository.Update(reservation);
+                await _unitOfWork.SaveChangesAsync();
+
+                return new YesNoResponse();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new YesNoResponse(ex.Message);
+            }
+        }
+
+        public async Task<YesNoResponse> SetFavoriteAsync(int reservationId, bool favorite)
+        {
+            try
+            {
+                var reservation = await _reservationRepository.FindByIdAsync(reservationId);
+
+                if (reservation == null)
+                {
+                    throw new NotFoundException(nameof(Reservation), reservationId);
+                }
+
+                reservation.IsFavorite = favorite;
+                _reservationRepository.Update(reservation);
                 await _unitOfWork.SaveChangesAsync();
 
                 return new YesNoResponse();

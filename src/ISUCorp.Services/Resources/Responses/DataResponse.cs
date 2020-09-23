@@ -6,7 +6,7 @@ namespace ISUCorp.Services.Resources.Responses
     /// Represents a response related to a data.
     /// </summary>
     /// <typeparam name="T">Data belonging to the response.</typeparam>
-    public class DataResponse<T> : BaseResponse/* where T : BaseEntityResource*/
+    public class DataResponse<T> : BaseResponse
     {
         /// <summary>
         /// Gets the data related to the response, if any.

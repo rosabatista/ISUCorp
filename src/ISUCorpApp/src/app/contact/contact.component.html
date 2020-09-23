@@ -1,0 +1,57 @@
+<div class="jumbotron jumbotron-navigation">
+    <div class="container container-navigation">
+      <div class="row row-navigation">
+        <div class="navigation-left">
+            <p i18n>Contact Details</p>
+        </div>
+        
+        <div class="navigation-center">
+            <p i18n>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                tempor incididunt ut labore et dolore magna aliqua. 
+            </p>
+        </div>
+  
+        <div class="navigation-right">
+          <a [routerLink]="['/contacts']" class="btn btn-secondary" i18n>Contact List</a>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="global-container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <form [formGroup]="contactForm" (ngSubmit)="delete()">
+  
+          <div class="card card-details">
+            <div class="card-body">
+              <h6 class="card-title">Contact Information</h6> 
+              <div class="form-group form-row">
+                  <div class="col-md-3 col-xs-12">
+                      <input type="text" class="form-control" placeholder="Contact Name"
+                            formControlName="name" />
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                      <input type="text" class="form-control" placeholder="Contact Name"
+                             formControlName="type" />
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                      <input type="text" class="form-control" placeholder="Phone Number" 
+                            formControlName="phone" />
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                      <input type="text" class="form-control" placeholder="Birth Date"
+                            formControlName="birthDate" />
+                  </div>
+              </div>
+        
+              <div class="form-group" style="width: 100%;">
+                <button class="btn btn-danger mr-1" type="submit" i18n>Delete</button>
+                <a class="btn btn-secondary" [routerLink]="['/contacts']" i18n>Back</a>
+              </div>
+            </div>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>

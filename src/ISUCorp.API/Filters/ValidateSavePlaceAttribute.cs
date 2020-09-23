@@ -48,9 +48,9 @@ namespace ISUCorp.API.Filters
 
             var placeByNameResource = await _placeService.FindByNameAsync(savePlaceResource.Name);
 
-            if (placeByNameResource.Success)
+            if (placeByNameResource.Success && placeByNameResource.Data != null)
             {
-                if (placeByIdResource == null ||
+                if (placeByIdResource == null || 
                     placeByNameResource.Data.Id != placeByIdResource.Data.Id)
                 {
                     context.Result = new BadRequestObjectResult(

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ISUCorp.API.Controllers
 {
-    [Route("api/services")]
+    [Route("api/places")]
     [Produces("application/json")]
     [ApiController]
     public class PlacesController : ControllerBase
@@ -65,7 +65,7 @@ namespace ISUCorp.API.Controllers
         /// </summary>
         /// <param name="name">Name of the place.</param>
         /// <returns>Details of the place whether exists.</returns>
-        [HttpGet("{name}/find_by_name")]
+        [HttpGet("find_by_name/{name}")]
         [ProducesResponseType(typeof(PlaceResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public async Task<IActionResult> GetByNameAsync(string name)
